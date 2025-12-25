@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ご注文ありがとうございました | Speedix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="flex-grow">
+    <div class="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-20 flex items-center justify-center">
+      <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center">
+          <div class="bg-green-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8">
+            <svg class="w-12 h-12 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+
+          <h1 class="text-4xl font-bold text-gray-900 mb-4">
+            ご注文ありがとうございます
+          </h1>
+
+          <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+            ご注文いただきました。
+            <br>
+            弊社スタッフが確認次第、お客様にご連絡させていただきます。
+          </p>
+
+          <div class="bg-blue-50 rounded-lg p-6 mb-8 text-left">
+            <h2 class="font-bold text-gray-900 mb-4">ご注文内容</h2>
+            <div id="order-details" class="space-y-2 text-gray-600"></div>
+          </div>
+
+          <div class="space-y-3">
+            <p class="text-sm text-gray-600">
+              ご不明な点やご質問がございましたら、
+              <a href="/contact.html" class="text-blue-600 hover:text-blue-700 font-bold">お問い合わせフォーム</a>からお気軽にご連絡ください。
+            </p>
+            <a href="/" class="inline-block bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-3 rounded-lg font-bold hover:from-blue-600 hover:to-cyan-600 transition-all">
+              ホームに戻る
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module">
+    import { initializeUI } from '/public/js/shared.js';
+
+    initializeUI();
+
+    const orderData = localStorage.getItem('order_data');
+    if (orderData) {
+      const order = JSON.parse(orderData);
+      const detailsDiv = document.getElementById('order-details');
+
+      const itemsHTML = order.items.map(item => `
+        <div class="flex justify-between">
+          <span>${item.name} × ${item.quantity}</span>
+          <span>¥${(item.price * item.quantity).toLocaleString()}</span>
+        </div>
+      `).join('');
+
+      detailsDiv.innerHTML = `
+        ${itemsHTML}
+        <div class="border-t border-gray-300 pt-2 mt-2 flex justify-between font-bold">
+          <span>合計</span>
+          <span>¥${order.total.toLocaleString()}</span>
+        </div>
+        <div class="mt-4 pt-4 border-t border-gray-300">
+          <p><strong>お名前:</strong> ${order.name}</p>
+          <p><strong>メール:</strong> ${order.email}</p>
+          <p><strong>電話:</strong> ${order.phone}</p>
+          ${order.company ? `<p><strong>会社名:</strong> ${order.company}</p>` : ''}
+        </div>
+      `;
+
+      localStorage.removeItem('order_data');
+    }
+  </script>
+</body>
+</html>

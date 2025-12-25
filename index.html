@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="最短・最速で成果を出すWeb制作サービス Speedix。ビジネスの成長を加速させる、スピード×品質のWebソリューション。Yis株式会社が提供。">
+  <meta property="og:title" content="Speedix - 最短・最速で成果を出すWeb制作サービス">
+  <meta property="og:description" content="ビジネスの成長を加速させる、スピード×品質のWebソリューション">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="/img_logo_black.png">
+  <title>Speedix | 最短・最速で成果を出すWeb制作サービス</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="flex-grow">
+    <section class="relative bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white py-20 sm:py-32 overflow-hidden">
+      <div class="absolute inset-0 opacity-30">
+        <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="timeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="100%" stopColor="#22D3EE" />
+            </linearGradient>
+            <linearGradient id="salesGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#34D399" />
+              <stop offset="100%" stopColor="#F59E0B" />
+            </linearGradient>
+          </defs>
+          <path d="M 0 500 L 100 480 L 200 450 L 300 420 L 400 380 L 500 350 L 600 310 L 700 270 L 800 230 L 900 190 L 1000 150 L 1100 110 L 1200 70" fill="none" stroke="url(#timeGradient)" stroke-width="3"></path>
+          <path d="M 0 600 L 100 560 L 200 520 L 300 480 L 400 440 L 500 400 L 600 360 L 700 320 L 800 280 L 900 240 L 1000 200 L 1100 160 L 1200 120" fill="none" stroke="url(#salesGradient)" stroke-width="3"></path>
+        </svg>
+      </div>
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl sm:text-6xl font-bold mb-6 leading-tight">
+          最短・最速で成果を出す
+          <br>
+          Web制作サービス
+        </h1>
+        <p class="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+          戦略的クリエイティブで、あなたのビジネスを加速させます
+        </p>
+        <a href="/products.html" class="inline-block bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-4 rounded-lg font-bold text-lg hover:from-blue-600 hover:to-cyan-600 transition-all transform hover:scale-105">
+          まずは内容を確認
+        </a>
+      </div>
+    </section>
+
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-4">こんなお悩みはありませんか？</h2>
+        <p class="text-center text-gray-600 mb-12">多くの企業がこのような課題を抱えています</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+            <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">制作期間が長すぎる</h3>
+            <p class="text-gray-600 leading-relaxed">一般的なWeb制作会社は3～6ヶ月の制作期間が必要です。でも、市場機会は待ってくれません。</p>
+          </div>
+          <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+            <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">料金が高い</h3>
+            <p class="text-gray-600 leading-relaxed">高額な予算が必要なため、中小企業はWeb制作に踏み切れません。予算内で実現できる会社が欲しい。</p>
+          </div>
+          <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+            <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">成果が出ない</h3>
+            <p class="text-gray-600 leading-relaxed">ただ「きれいなサイト」を作るだけでは、売上につながりません。成果を出すデザインが必要です。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-4">提供内容</h2>
+        <p class="text-center text-gray-600 mb-12">お客様のニーズに合わせた最適なソリューションをご用意しています</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="products-grid"></div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">選ばれる理由</h2>
+        <p class="text-lg text-gray-600 mb-12 leading-relaxed">
+          Yis株式会社は、マーケティング型のWeb制作会社として、
+          <br class="hidden sm:block">
+          ただ作るだけではなく、成果を重視した戦略的クリエイティブを提供します。
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
+          <div class="flex items-start space-x-3">
+            <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></path></svg>
+            <div>
+              <h4 class="font-bold text-gray-900 mb-1">制作から運用まで一貫対応</h4>
+              <p class="text-gray-600 text-sm">Webサイトの企画・制作・運用・マーケティングまで、すべてをサポート</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></path></svg>
+            <div>
+              <h4 class="font-bold text-gray-900 mb-1">豊富な実績と信頼</h4>
+              <p class="text-gray-600 text-sm">多業種での制作実績により、様々なニーズに対応可能</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></path></svg>
+            <div>
+              <h4 class="font-bold text-gray-900 mb-1">明確な料金体系</h4>
+              <p class="text-gray-600 text-sm">追加費用なしの分かりやすい価格設定で安心</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></path></svg>
+            <div>
+              <h4 class="font-bold text-gray-900 mb-1">迅速なレスポンス</h4>
+              <p class="text-gray-600 text-sm">お問い合わせから納品まで、スピーディーな対応を実現</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6">今すぐビジネスを加速させましょう</h2>
+        <p class="text-xl text-white mb-8 leading-relaxed">
+          お客様のビジネス成長をサポートする最適なソリューションをご提案します
+        </p>
+        <a href="/products.html" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition-all transform hover:scale-105 shadow-xl">
+          今すぐ制作を開始する
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module">
+    import { getActiveProducts } from '/public/js/products.js';
+    import { initializeUI } from '/public/js/shared.js';
+
+    initializeUI();
+
+    const productsGrid = document.getElementById('products-grid');
+    const products = getActiveProducts();
+
+    products.forEach(product => {
+      const productHTML = `
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-sm transition-all border border-gray-100 overflow-hidden group">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">${product.name}</h3>
+            <p class="text-gray-600 text-sm mb-4 line-clamp-2">${product.description}</p>
+            <div class="mb-4">
+              <span class="text-3xl font-bold text-blue-600">
+                ¥${product.price.toLocaleString()}
+              </span>
+              <span class="text-gray-500 text-sm ml-1">（税込）</span>
+            </div>
+            <div style="width:96%;margin:2em auto;">
+            <a href="/product-detail.html?slug=${product.slug}" class="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-bold hover:bg-gray-200 transition-colors">
+                  詳細を見る
+                </a>
+                </div>
+            <!--
+              <a href="/products.html?slug=${product.slug}" class="block w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-center py-3 rounded-lg font-bold hover:from-blue-600 hover:to-cyan-600 transition-all">
+              カートに追加する
+              </a>
+            -->
+            <div  style="width:96%;margin:2em auto 0;">
+            <a href="/contact.html" class="px-6 py-3 font-bold transition-all bg-gradient-to-r rounded-lg from-blue-500 to-cyan-500 text-white hover:from-blue-600 hover:to-cyan-600">
+                  制作を依頼する
+            </a>
+            </div>
+          </div>
+        </div>
+      `;
+      productsGrid.innerHTML += productHTML;
+    });
+  </script>
+</body>
+</html>

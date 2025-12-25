@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>チェックアウト | Speedix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="flex-grow">
+    <section class="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white py-20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold mb-6">チェックアウト</h1>
+        <p class="text-xl text-gray-300 leading-relaxed">
+          ご選択いただいたサービスを確認し、注文を確定します。
+        </p>
+      </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">ご注文内容</h2>
+            <div id="cart-items" class="space-y-4 mb-6"></div>
+
+            <div id="empty-cart" class="text-center py-12">
+              <p class="text-gray-600 mb-4">カートに商品がありません</p>
+              <a href="/products.html" class="text-blue-600 hover:text-blue-700 font-bold">商品を選択する</a>
+            </div>
+
+            <form id="checkout-form" class="mt-8 pt-8 border-t border-gray-200 hidden">
+              <h2 class="text-2xl font-bold text-gray-900 mb-6">お客様情報</h2>
+
+              <div class="mb-6">
+                <label class="block text-sm font-bold text-gray-700 mb-2">お名前 *</label>
+                <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+
+              <div class="mb-6">
+                <label class="block text-sm font-bold text-gray-700 mb-2">メールアドレス *</label>
+                <input type="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+
+              <div class="mb-6">
+                <label class="block text-sm font-bold text-gray-700 mb-2">電話番号 *</label>
+                <input type="tel" name="phone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+
+              <div class="mb-6">
+                <label class="block text-sm font-bold text-gray-700 mb-2">会社名</label>
+                <input type="text" name="company" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              </div>
+
+              <div class="mb-6">
+                <label class="block text-sm font-bold text-gray-700 mb-2">ご質問・ご要望</label>
+                <textarea name="notes" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+              </div>
+
+              <div class="mb-6">
+                <label class="flex items-start space-x-3 cursor-pointer">
+                  <input type="checkbox" name="agree_terms" required class="mt-1">
+                  <span class="text-sm text-gray-600">
+                    <a href="/terms.html" class="text-blue-600 hover:text-blue-700">利用規約</a>と<a href="/privacy.html" class="text-blue-600 hover:text-blue-700">プライバシーポリシー</a>に同意します。*
+                  </span>
+                </label>
+              </div>
+
+              <div id="error-message" class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 hidden"></div>
+
+              <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-3 rounded-lg font-bold hover:from-blue-600 hover:to-cyan-600 transition-all" id="submit-btn">
+                注文を確定する
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div>
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 sticky top-24">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">ご注文合計</h2>
+            <div class="space-y-2 mb-4">
+              <div class="flex justify-between text-gray-600">
+                <span>小計</span>
+                <span id="subtotal">¥0</span>
+              </div>
+              <div class="flex justify-between text-gray-600">
+                <span>送料</span>
+                <span>無料</span>
+              </div>
+            </div>
+            <div class="border-t border-gray-200 pt-4">
+              <div class="flex justify-between text-2xl font-bold text-gray-900">
+                <span>合計</span>
+                <span id="total">¥0</span>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-4">税込価格</p>
+
+            <a href="/products.html" class="block mt-6 text-center text-blue-600 hover:text-blue-700 font-bold">
+              商品を追加する
+            </a>
+
+            <button
+              onclick="clearCart()"
+              class="w-full mt-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-bold hover:bg-gray-200 transition-colors">
+              カートをクリア
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module">
+    import { cart } from '/public/js/cart.js';
+    import { initializeUI, updateCartBadge } from '/public/js/shared.js';
+
+    initializeUI();
+
+    const renderCart = () => {
+      const cartItemsContainer = document.getElementById('cart-items');
+      const checkoutForm = document.getElementById('checkout-form');
+      const emptyCart = document.getElementById('empty-cart');
+
+      if (cart.items.length === 0) {
+        cartItemsContainer.innerHTML = '';
+        checkoutForm.classList.add('hidden');
+        emptyCart.classList.remove('hidden');
+      } else {
+        emptyCart.classList.add('hidden');
+        checkoutForm.classList.remove('hidden');
+
+        cartItemsContainer.innerHTML = cart.items.map(item => `
+          <div class="flex justify-between items-center py-4 border-b border-gray-200 last:border-b-0">
+            <div class="flex-1">
+              <h3 class="font-bold text-gray-900">${item.name}</h3>
+              <p class="text-sm text-gray-600">数量: ${item.quantity}</p>
+            </div>
+            <div class="text-right">
+              <p class="font-bold text-gray-900">¥${(item.price * item.quantity).toLocaleString()}</p>
+              <button
+                onclick="removeItem('${item.id}')"
+                class="text-sm text-red-600 hover:text-red-700 font-bold mt-1">
+                削除
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('subtotal').textContent = `¥${cart.getTotalPrice().toLocaleString()}`;
+      document.getElementById('total').textContent = `¥${cart.getTotalPrice().toLocaleString()}`;
+    };
+
+    window.removeItem = function(productId) {
+      cart.removeFromCart(productId);
+      updateCartBadge();
+      renderCart();
+    };
+
+    window.clearCart = function() {
+      if (confirm('カートをクリアしてもよろしいですか？')) {
+        cart.clearCart();
+        updateCartBadge();
+        renderCart();
+      }
+    };
+
+    document.getElementById('checkout-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submit-btn');
+      const errorDiv = document.getElementById('error-message');
+      submitBtn.disabled = true;
+
+      try {
+        const formData = new FormData(e.target);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const phone = formData.get('phone');
+
+        if (!name || !email || !phone) {
+          throw new Error('必須項目を入力してください。');
+        }
+
+        localStorage.setItem('order_data', JSON.stringify({
+          name,
+          email,
+          phone,
+          company: formData.get('company'),
+          notes: formData.get('notes'),
+          items: cart.items,
+          total: cart.getTotalPrice(),
+        }));
+
+        cart.clearCart();
+        updateCartBadge();
+        window.location.href = '/thank-you.html';
+      } catch (error) {
+        console.error('Error:', error);
+        errorDiv.textContent = error.message || 'エラーが発生しました。もう一度お試しください。';
+        errorDiv.classList.remove('hidden');
+        submitBtn.disabled = false;
+      }
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>

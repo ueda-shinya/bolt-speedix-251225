@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品詳細 | Speedix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="flex-grow">
+    <div class="min-h-screen bg-gray-50 py-12">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <a href="/products.html" class="inline-flex items-center text-blue-600 hover:text-blue-700 mb-8 font-medium">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+          商品一覧に戻る
+        </a>
+
+        <div id="product-detail" class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100"></div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module">
+    import { getProductBySlug } from '/public/js/products.js';
+    import { cart } from '/public/js/cart.js';
+    import { initializeUI, updateCartBadge } from '/public/js/shared.js';
+
+    initializeUI();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const slug = urlParams.get('slug');
+
+    if (!slug) {
+      document.getElementById('product-detail').innerHTML = `
+        <div class="flex items-center justify-center p-12">
+          <div class="text-center">
+            <h1 class="text-2xl font-bold text-gray-900 mb-4">商品が見つかりません</h1>
+            <a href="/products.html" class="text-blue-600 hover:text-blue-700">商品一覧に戻る</a>
+          </div>
+        </div>
+      `;
+    } else {
+      const product = getProductBySlug(slug);
+
+      if (!product) {
+        document.getElementById('product-detail').innerHTML = `
+          <div class="flex items-center justify-center p-12">
+            <div class="text-center">
+              <h1 class="text-2xl font-bold text-gray-900 mb-4">商品が見つかりません</h1>
+              <a href="/products.html" class="text-blue-600 hover:text-blue-700">商品一覧に戻る</a>
+            </div>
+          </div>
+        `;
+      } else {
+        const isCoreProduct = (s) => s === 'lp-creation' || s === 'homepage-production';
+        const isOptionProduct = (s) => !isCoreProduct(s);
+        const hasCoreProduct = cart.hasCorProduct();
+
+        const detailHTML = `
+          ${product.image_url ? `
+            <div class="w-full h-96 overflow-hidden">
+              <img src="${product.image_url}" alt="${product.image_alt || product.name}" class="w-full h-full object-cover">
+            </div>
+          ` : `
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 h-64 flex items-center justify-center">
+              <svg class="w-32 h-32 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </div>
+          `}
+
+          <div class="p-8 lg:p-12">
+            <div class="mb-8">
+              <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                ${product.name}
+              </h1>
+              <p class="text-xl text-gray-600 leading-relaxed">${product.description}</p>
+            </div>
+
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold text-gray-900 mb-4">特徴・導入メリット</h2>
+              <ul class="space-y-3">
+                ${product.features.map(feature => `
+                  <li class="flex items-start space-x-3">
+                    <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></path></svg>
+                    <span class="text-gray-600 text-lg">${feature}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+
+            <div class="border-t border-gray-200 pt-8">
+              <div class="mb-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <p class="text-gray-600 text-sm mb-2">価格</p>
+                    <span class="text-4xl font-bold text-blue-600">
+                      ¥${product.price.toLocaleString()}
+                    </span>
+                    <span class="text-gray-500 text-sm ml-2">（税込）</span>
+                  </div>
+                  ${isCoreProduct(product.slug) ? `
+                    <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-bold">
+                      コア商品
+                    </span>
+                  ` : `
+                    <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-bold">
+                      追加オプション
+                    </span>
+                  `}
+                </div>
+              </div>
+
+              ${isOptionProduct(product.slug) && !hasCoreProduct ? `
+                <div class="mb-6 bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <div class="flex items-start space-x-3">
+                    <svg class="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></path></svg>
+                    <div>
+                      <p class="font-bold text-amber-900 mb-1">注意</p>
+                      <p class="text-sm text-amber-800">
+                        追加オプションを利用するには、先に「LP制作」または「ホームページ制作」をカートに追加してください。
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ` : ''}
+
+              <div class="flex space-x-4">
+                <a href="/products.html" class="px-8 py-3 bg-gray-100 text-gray-700 rounded-lg font-bold hover:bg-gray-200 transition-colors">
+                  他の商品を見る
+                </a>
+                <button
+                  onclick="addToCartClick('${product.id}')"
+                  ${isOptionProduct(product.slug) && !hasCoreProduct ? 'disabled' : ''}
+                  class="px-8 py-3 rounded-lg font-bold transition-all ${
+                    isOptionProduct(product.slug) && !hasCoreProduct
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:from-blue-600 hover:to-cyan-600'
+                  }">
+                  カートに追加
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('product-detail').innerHTML = detailHTML;
+
+        window.addToCartClick = function(productId) {
+          const products = [${JSON.stringify(product)}];
+          const prod = products.find(p => p.id === productId);
+          if (prod) {
+            cart.addToCart(prod);
+            updateCartBadge();
+            alert('カートに追加しました');
+          }
+        };
+      }
+    }
+  </script>
+</body>
+</html>
