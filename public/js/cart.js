@@ -54,7 +54,7 @@ class Cart {
 
   hasCorProduct() {
     return this.items.some(item =>
-      item.slug === 'lp-creation' || item.slug === 'homepage-production' || item.slug === 'lp-contact' || item.slug === 'lp-booking'
+      item.slug === 'speedix-lp' || item.slug === 'speedix-hp' || item.slug === 'lp-contact' || item.slug === 'lp-booking'
     );
   }
 }
