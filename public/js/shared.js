@@ -4,7 +4,7 @@ const headerHTML = `
 <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
     <a href="/" class="flex items-center space-x-2">
-      <img src="/img_logo_black.png" alt="Speedix" class="h-8">
+      <img src="/public/img_logo_black.png" alt="Speedix" class="h-8">
       <span class="font-bold text-gray-900 hidden sm:inline">Speedix</span>
     </a>
     <ul class="flex items-center space-x-6">
