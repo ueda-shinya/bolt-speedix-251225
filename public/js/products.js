@@ -19,7 +19,7 @@ export const products = [
   {
     id: '2',
     name: 'ホームページ制作',
-    slug: 'homepage-production',
+    slug: 'speedix-hp',
     description: '4ページ固定＋お問い合わせフォーム',
     price: 160000,
     features: [
