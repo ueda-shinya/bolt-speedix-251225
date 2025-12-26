@@ -2,7 +2,7 @@ export const products = [
   {
     id: '1',
     name: 'LP制作',
-    slug: 'lp-creation',
+    slug: 'speedix-lp',
     description: '資料請求を目的としたLP',
     price: 50000,
     features: [
