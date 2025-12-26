@@ -11,7 +11,7 @@ export const products = [
       '講座・研修・プログラムの概要資料',
       '社内稟議用に「上長・決裁者に渡してほしいPDF」を配りたいケース'
     ],
-    image_url: '/LPimage.jpg',
+    image_url: '/public/LPimage.jpg',
     image_alt: '資料請求を目的としたLP',
     is_active: true,
     display_order: 1
@@ -26,7 +26,7 @@ export const products = [
       'トップ／サービス紹介／会社情報・プロフィール／お問い合わせ',
       '事業の「顔」になるミニマムなHP'
     ],
-    image_url: '/homepageimg.jpg',
+    image_url: '/public/homepageimg.jpg',
     image_alt: '4ページ固定＋お問い合わせフォーム',
     is_active: true,
     display_order: 2
